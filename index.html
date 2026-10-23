@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07110c">
+<meta name="description" content="Batalla Futbolera: crea tus equipos, diseña tácticas y simula partidos con miles de futbolistas de las cinco grandes ligas.">
+<title>BATALLA FUTBOLERA | Simulador de fútbol</title>
+<link rel="icon" href="assets/logo-batalla-futbolera.png">
+<style>
+:root{--bg:#050a08;--panel:#0b1711;--green:#55ff69;--gold:#f5c85b;--text:#f4f7f4;--muted:#b5c3b8;--line:#244536}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.wrap{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:#050a08ed;backdrop-filter:blur(14px);border-bottom:1px solid #244536}
+nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{display:flex;align-items:center;gap:12px;font-weight:1000;letter-spacing:.05em}.brand img{width:58px;height:58px;object-fit:cover;border-radius:12px}.brand span{line-height:1.05}.brand small{display:block;color:var(--green);font-size:10px;letter-spacing:.2em;margin-top:5px}
+.navlinks{display:flex;align-items:center;gap:23px;color:#d7e1d9;font-size:14px}.navlinks a:hover{color:var(--green)}.donate-nav,.btn{border:0;border-radius:12px;padding:13px 19px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:9px}.donate-nav{background:linear-gradient(135deg,#ffe18a,#d9a52f);color:#161006}.btn-primary{background:linear-gradient(135deg,#6dff71,#21ce4a);color:#06120a;box-shadow:0 8px 35px #2cff5b22}.btn-outline{border:1px solid #4a7861;background:#07120c;color:white}
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 72% 30%,#15522b 0,transparent 35%),linear-gradient(115deg,#07150d,#030706 65%);border-bottom:1px solid #183b28}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#050a08 0%,#050a08c9 48%,#050a0833 100%),repeating-linear-gradient(0deg,transparent 0 50px,#5cff6910 51px 52px);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center;padding:66px 0 56px;min-height:500px}.eyebrow{color:var(--gold);font-size:12px;font-weight:900;letter-spacing:.23em;text-transform:uppercase}.hero h1{font-size:clamp(42px,6vw,76px);line-height:.96;letter-spacing:-.05em;margin:16px 0}.hero h1 span{color:var(--green)}.hero p{font-size:18px;line-height:1.7;color:#c6d4c9;max-width:600px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}.hero-art{display:flex;justify-content:center;align-items:center;position:relative}.hero-art img{width:min(100%,460px);filter:drop-shadow(0 0 45px #2cff5b26);border-radius:22px;mix-blend-mode:screen}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:25px}.stat{border-left:2px solid var(--green);padding:4px 12px}.stat strong{display:block;font-size:23px}.stat span{font-size:12px;color:var(--muted)}
+section{padding:65px 0}.section-head{text-align:center;max-width:720px;margin:0 auto 32px}.section-head h2{font-size:clamp(28px,4vw,42px);margin:8px 0 12px}.section-head p{color:var(--muted);line-height:1.65}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(145deg,#102219,#08110c);border:1px solid var(--line);border-radius:18px;padding:24px}.card .ico{font-size:28px}.card h3{margin:14px 0 8px}.card p{color:var(--muted);line-height:1.65;margin:0}
+.play-panel{background:radial-gradient(ellipse at 50% 0,#164d29 0,transparent 65%),#09130d;border:1px solid #2e6842;border-radius:24px;padding:30px;text-align:center}.play-panel h2{margin:0 0 10px}.play-panel p{color:var(--muted)}.donation{background:linear-gradient(115deg,#191606,#100f08 60%,#1a1608);border:1px solid #b28a2c;border-radius:22px;padding:30px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}.donation h2{color:var(--gold);margin:0 0 10px}.donation p{color:#d6d1bd;line-height:1.65;margin:0}.donation-actions{display:flex;flex-direction:column;gap:10px;min-width:220px}.fine{font-size:12px;color:#a9b6ac;line-height:1.6;margin-top:15px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:#9cafa2;font-size:13px}.footrow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;background:#000b;z-index:30;display:none;place-items:center;padding:20px}.modal.open{display:grid}.modal-box{width:min(520px,100%);background:#0b1711;border:1px solid #4d805d;border-radius:20px;padding:26px;box-shadow:0 20px 100px #000}.modal-box h3{margin-top:0}.modal-box p{color:var(--muted);line-height:1.6}.modal-box input{width:100%;background:#030806;color:white;border:1px solid #41644e;border-radius:10px;padding:12px;margin:8px 0 14px}.modal-actions{display:flex;gap:10px;flex-wrap:wrap}.hidden{display:none!important}
+@media(max-width:800px){.navlinks{display:none}.hero-grid{grid-template-columns:1fr;padding:45px 0}.hero-art img{max-width:310px}.cards{grid-template-columns:1fr}.donation{grid-template-columns:1fr}.donation-actions{min-width:0}.stats{grid-template-columns:repeat(3,1fr)}.brand img{width:48px;height:48px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+<a class="brand" href="#inicio"><img src="assets/logo-batalla-futbolera.png" alt="Logo Batalla Futbolera"><span>BATALLA<br>FUTBOLERA<small>EL SIMULADOR</small></span></a>
+<div class="navlinks"><a href="#inicio">Inicio</a><a href="#funciones">Características</a><a href="#jugar">Jugar</a><a href="#donaciones">Donaciones</a></div>
+<a class="donate-nav" href="#donaciones">♥ Apoyar el proyecto</a>
+</nav></div></header>
+<main>
+<section class="hero" id="inicio"><div class="wrap hero-grid">
+<div><div class="eyebrow">Táctica · Estrategia · Competición</div><h1>EL FÚTBOL<br>SE DECIDE EN<br><span>LA BATALLA.</span></h1>
+<p>Crea tus equipos, elige la táctica y simula partidos con miles de futbolistas de las cinco grandes ligas. Tu estrategia. Tus equipos. Tu historia.</p>
+<div class="actions"><a class="btn btn-primary" href="#jugar">⚽ JUGAR AHORA</a><a class="btn btn-outline" href="#funciones">Descubrir el juego</a></div>
+<div class="stats"><div class="stat"><strong>2.786</strong><span>FUTBOLISTAS INTEGRADOS</span></div><div class="stat"><strong>5</strong><span>GRANDES LIGAS</span></div><div class="stat"><strong>11 vs 11</strong><span>SIMULACIÓN TÁCTICA</span></div></div>
+</div><div class="hero-art"><img src="assets/logo-batalla-futbolera.png" alt="Escudo oficial de Batalla Futbolera"></div>
+</div></section>
+<section id="funciones"><div class="wrap"><div class="section-head"><div class="eyebrow">Toma el control</div><h2>Tu equipo. Tu estrategia.</h2><p>Construye tu proyecto futbolístico, prepara tus alineaciones y comprueba cómo se desarrolla cada partido.</p></div>
+<div class="cards">
+<article class="card"><div class="ico">🧠</div><h3>Prepara tu táctica</h3><p>Organiza el once, distribuye a tus jugadores y ajusta la formación para encontrar tu estilo de juego.</p></article>
+<article class="card"><div class="ico">🌍</div><h3>Futbolistas de élite</h3><p>Una base integrada de 2.786 jugadores de las cinco grandes ligas europeas para construir tus equipos.</p></article>
+<article class="card"><div class="ico">🏆</div><h3>Simula partidos</h3><p>Enfrenta a tus equipos, consulta los resultados y revisa el historial de tus encuentros.</p></article>
+</div></div></section>
+<section id="jugar"><div class="wrap"><div class="play-panel"><div class="eyebrow">La batalla empieza aquí</div><h2>¿Listo para saltar al campo?</h2><p>Abre el simulador integrado. No necesitas descargar los futbolistas por separado.</p><a class="btn btn-primary" href="juego.html">⚽ ENTRAR AL SIMULADOR</a><p class="fine">El juego se abre en una página propia para aprovechar mejor el espacio de pantalla y conservar todas sus funciones.</p></div></div></section>
+<section id="donaciones"><div class="wrap"><div class="donation"><div><div class="eyebrow">Hecho con pasión por el fútbol</div><h2>Apoya BATALLA FUTBOLERA</h2><p>El proyecto está en desarrollo independiente. Si disfrutas del simulador, tu aportación voluntaria puede ayudar a dedicar más tiempo a nuevas funciones, mejoras y actualizaciones de jugadores.</p><p class="fine">Las aportaciones son voluntarias y no desbloquean ventajas dentro del juego.</p></div><div class="donation-actions"><button class="btn donate-nav" id="donateButton">♥ DONAR CON PAYPAL</button><a class="btn btn-outline" href="https://www.paypal.com/buttons/" target="_blank" rel="noopener">Configurar PayPal</a></div></div><p class="fine">Aviso: el botón de donación quedará listo para enlazar con tu página de PayPal. Para activar cobros reales hay que añadir tu enlace personal de PayPal.Me o el enlace/botón de donación generado desde PayPal.</p></div></section>
+</main>
+<footer><div class="wrap footrow"><span>© <span id="year"></span> BATALLA FUTBOLERA · Proyecto independiente.</span><span>Un juego hecho por y para amantes del fútbol.</span></div></footer>
+<div class="modal" id="donateModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-box"><h3 id="modalTitle">Activa las donaciones con PayPal</h3><p>Para que las aportaciones lleguen a tu cuenta, pega aquí tu enlace personal de PayPal.Me o el enlace de donación que hayas creado en PayPal. Se guardará en este navegador y el botón se actualizará.</p><label for="paypalLink">Tu enlace de PayPal</label><input id="paypalLink" type="url" placeholder="https://paypal.me/TuUsuario" autocomplete="url"><div class="modal-actions"><button class="btn btn-primary" id="savePaypal">Guardar enlace</button><button class="btn btn-outline" id="closeModal">Cerrar</button><a class="btn btn-outline" href="https://www.paypal.com/buttons/" target="_blank" rel="noopener">Crear enlace</a></div><p class="fine">Enlace oficial de PayPal. No introduzcas aquí tu contraseña ni datos bancarios.</p></div></div>
+<script>
+const DONATION_KEY="bf_paypal_donation_url";
+const validDonationUrl = value => { try { const u = new URL(value); return u.protocol==="https:" && (u.hostname==="paypal.me" || u.hostname.endsWith(".paypal.me") || u.hostname==="paypal.com" || u.hostname.endsWith(".paypal.com")); } catch(e){ return false; } };
+function openDonate(){const saved=localStorage.getItem(DONATION_KEY)||"";if(saved && validDonationUrl(saved)){window.open(saved,"_blank","noopener,noreferrer");}else{document.getElementById("donateModal").classList.add("open");}}
+document.getElementById("donateButton").addEventListener("click",openDonate);
+document.getElementById("closeModal").addEventListener("click",()=>document.getElementById("donateModal").classList.remove("open"));
+document.getElementById("savePaypal").addEventListener("click",()=>{const field=document.getElementById("paypalLink");const url=field.value.trim();if(!validDonationUrl(url)){alert("Introduce un enlace HTTPS válido de PayPal, como https://paypal.me/TuUsuario");return;}localStorage.setItem(DONATION_KEY,url);document.getElementById("donateModal").classList.remove("open");alert("Enlace guardado en este navegador. El botón ya puede abrir tu página de PayPal.");});
+document.getElementById("donateModal").addEventListener("click",e=>{if(e.target.id==="donateModal")e.currentTarget.classList.remove("open")});
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+</body></html>
